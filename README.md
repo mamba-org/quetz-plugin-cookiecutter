@@ -6,6 +6,6 @@ Creating a new plugin is as simple as:
 
 ```
 pip install cookiecutter
-git clone https://github.com/quetz-plugin-cookiecutter
+git clone https://github.com/mamba-org/quetz-plugin-cookiecutter.git
 cookiecutter quetz-plugin-cookiecutter
 ```
