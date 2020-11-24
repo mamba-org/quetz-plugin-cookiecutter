@@ -47,7 +47,6 @@ jobs:
           micromamba activate ~/test_env
 
           # install quetz
-          git clone https://github.com/mamba-org/quetz.git
           git clone --single-branch --branch subprocess-worker https://github.com/mamba-org/quetz.git 
           cd quetz && pip install -e .[dev]
 
