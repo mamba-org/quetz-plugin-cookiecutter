@@ -48,6 +48,7 @@ jobs:
 
           # install quetz
           git clone https://github.com/mamba-org/quetz.git
+          git clone --single-branch --branch subprocess-worker https://github.com/mamba-org/quetz.git 
           cd quetz && pip install -e .[dev]
 
       - name: test plugin
@@ -57,5 +58,7 @@ jobs:
           export MAMBA_EXE=$(pwd)/micromamba
           . $MAMBA_ROOT_PREFIX/etc/profile.d/mamba.sh
           micromamba activate ~/test_env
+
+          pip install pytest-cookies
 
           pytest tests
