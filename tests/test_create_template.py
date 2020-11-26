@@ -7,15 +7,17 @@ import subprocess
 from quetz import cli as qcli
 
 
+
 def quetz_cmd(cmd, *args):
     """Run the tox suite of the newly created plugin."""
     try:
-        subprocess.check_call([
+        output = subprocess.check_output([
             "quetz",
             cmd,
-        ] + list(args))
+        ] + list(args), stderr=subprocess.STDOUT)
     except subprocess.CalledProcessError as e:
         pytest.fail(e)
+    return output.decode()
 
 
 def test_run_tests(plugin):
@@ -38,7 +40,7 @@ def quetz_deployment():
     yield deploy_dir
 
 
-def test_initialize_migrations(plugin, quetz_deployment):
+def test_initialize_migrations(plugin, quetz_deployment, capsys):
     deploy_dir = quetz_deployment
 
     quetz_cmd("make-migrations", deploy_dir, '--plugin', "quetz-foo_bar", "--message", "initial foo_bar revision", "--initialize")
@@ -46,6 +48,10 @@ def test_initialize_migrations(plugin, quetz_deployment):
     version_location = plugin_dir / "quetz_foo_bar" / "migrations" / "versions"
     migration_scripts = list(version_location.glob("*initial_foo_bar_revision.py"))
     assert migration_scripts
+
+    output = quetz_cmd("init-db", deploy_dir)
+
+    assert "initial foo_bar revision" in output
 
 @pytest.fixture
 def plugin(cookies):
