@@ -6,7 +6,8 @@ setup(
     entry_points={
         "quetz": ["quetz-{{cookiecutter.plugin_name}} = quetz_{{cookiecutter.plugin_name}}.main"],
         "quetz.models": ["quetz-{{cookiecutter.plugin_name}} = quetz_{{cookiecutter.plugin_name}}.db_models"],
-        "quetz.migrations": ["quetz-{{cookiecutter.plugin_name}} = quetz_{{cookiecutter.plugin_name}}.migrations"]
+        "quetz.migrations": ["quetz-{{cookiecutter.plugin_name}} = quetz_{{cookiecutter.plugin_name}}.migrations"],
+        "quetz.jobs": ["quetz-{{cookiecutter.plugin_name}} = quetz_{{cookiecutter.plugin_name}}.jobs"]
         },
     packages=[
         "quetz_{{cookiecutter.plugin_name}}",
