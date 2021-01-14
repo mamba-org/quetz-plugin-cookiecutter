@@ -14,4 +14,4 @@ def test_dummy_job(client, jobs_user):
     response = client.get("/api/jobs")
     
     assert response.status_code == 200
-    assert response.json()['result'][0]['manifest'] == "dummy_job"
+    assert "dummy_job" in response.json()['result'][0]['manifest']
