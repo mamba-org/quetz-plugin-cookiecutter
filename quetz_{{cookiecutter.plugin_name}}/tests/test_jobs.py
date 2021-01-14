@@ -10,8 +10,9 @@ def test_dummy_job(client, jobs_user):
             "items_spec": "*"})
 
     assert response.status_code == 201
+    job_id = response.json()['id']
 
-    response = client.get("/api/jobs")
+    response = client.get(f"/api/jobs/{job_id}")
     
     assert response.status_code == 200
-    assert "dummy_job" in response.json()['result'][0]['manifest']
+    assert "dummy_job" in response.json()['manifest']
